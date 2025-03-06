@@ -7,7 +7,7 @@
 | **Total** | 863 | 1807 | 806 | 3476 |
 | **Coverage** | 0 % |0 % | 0 % | 0 % |
 
-## 1.[Two Sum](https://leetcode.com/problems/two-sum/)[Easy]
+## 1. [Two Sum](https://leetcode.com/problems/two-sum/)[Easy]
 
 Two Sum V1(雙for迴圈):
 ```
@@ -38,7 +38,7 @@ class Solution:
 >以enumerate創建字典，並透過計算補數的方式找出答案
 
 
-## 9.[Palindrome Number](https://leetcode.com/problems/palindrome-number/)[Easy]
+## 9. [Palindrome Number](https://leetcode.com/problems/palindrome-number/)[Easy]
 
 Palindrome Number V1(反轉數字):
 ```
