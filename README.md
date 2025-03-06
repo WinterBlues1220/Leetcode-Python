@@ -46,19 +46,16 @@ class Solution:
     def isPalindrome(self, x: int) -> bool:
         if( x < 0 or (x % 10 == 0 and x != 0)):
             return False
-        else:
-            rNum = 0
-            while(x > rNum):
-                rNum = rNum * 10 + x % 10
-                x = x // 10
 
-            if(x == rNum or x == rNum // 10):
-                return True
-            else:
-                return False
+        rNum = 0
+        while(x > rNum):
+            rNum = rNum * 10 + x % 10
+            x = x // 10
+
+        return x == rNum or x == rNum // 10
 
 ```
->排除特殊情況後，以數學原理來把反轉的數字錄入rNum來進行後續回文數的確認
+>排除特殊情況後，把後半段反轉的數字錄入rNum來進行後續回文數的確認
 
 Palindrome Number V2(反轉字串):
 ```
