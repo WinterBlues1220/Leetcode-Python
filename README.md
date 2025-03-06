@@ -60,19 +60,16 @@ class Solution:
 ```
 >排除特殊情況後，以數學原理來把反轉的數字錄入rNum來進行後續回文數的確認
 
-Palindrome Number V2(ChatGPT建議解法):
+Palindrome Number V2(反轉字串):
 ```
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        if x < 0 or (x % 10 == 0 and x != 0):  
+
+        if x < 0:
             return False
-        
-        rNum = 0
-        while x > rNum:
-            rNum = rNum * 10 + x % 10
-            x //= 10  
 
-        return x == rNum or x == rNum // 10  
+        s = str(x)
 
+        return s == s[::-1]
 ```
->與V1原理相同，但是更為簡潔
+>排除特殊情況後，以反轉字串來進行直接比較
