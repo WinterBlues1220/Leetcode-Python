@@ -1,2 +1,2 @@
-# [Leetcode]-Python (https://leetcode.com/)
+# [Leetcode](https://leetcode.com/)-Python 
 
