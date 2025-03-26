@@ -87,9 +87,9 @@ class Solution:
 
 
 
-#課程內容 -- 其他
+# 課程內容 -- 其他
 
-##BeautifulSoup - CNA新聞內容擷取
+## BeautifulSoup - CNA新聞內容擷取
 
 ```
 from urllib.request import Request, urlopen
