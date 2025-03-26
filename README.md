@@ -94,26 +94,45 @@ class Solution:
 ```
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
+from google.colab import files
+import time
 
-url = 'CNA新聞網中的任意新聞'
+url = 'https://www.cna.com.tw/'
+
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
 
 req = Request(url, headers=headers)
 html = urlopen(req).read().decode('utf-8')
-
 soup = BeautifulSoup(html, 'html.parser')
 
-title = soup.find('h1').get_text(strip=True) if soup.find('h1') else '無標題'
+news_links = [a['href'] for a in soup.find_all('a', href=True) if '/news/' in a['href']]
 
-date = soup.find('div', class_='updatetime').get_text(strip=True) if soup.find('div', class_='updatetime') else '無時間'
+print(f"總共找到 {len(news_links)} 筆新聞連結")
 
-content = '\n'.join([p.get_text(strip=True) for p in soup.find('div', class_='paragraph').find_all('p')]) if soup.find('div', class_='paragraph') else '無內容'
+all_news = ""
 
-news = f"標題：{title}\n時間：{date}\n內容：\n{content}\n"
+for i, link in enumerate(news_links, start=1):
+    print(f"正在抓取第 {i} 篇新聞: {link}") 
+    full_url = f'https://www.cna.com.tw{link}'
+    
+    req = Request(full_url, headers=headers)
+    html = urlopen(req).read().decode('utf-8')
+    soup = BeautifulSoup(html, 'html.parser')
+
+    title = soup.find('h1').get_text(strip=True) if soup.find('h1') else '無標題'
+    date = soup.find('div', class_='updatetime').get_text(strip=True) if soup.find('div', class_='updatetime') else '無時間'
+    content = '\n'.join([p.get_text(strip=True) for p in soup.find('div', class_='paragraph').find_all('p')]) if soup.find('div', class_='paragraph') else '無內容'
+
+    news = f"標題：{title}\n時間：{date}\n內容：\n{content}\n\n"
+    all_news += news
+
+    time.sleep(1)
 
 with open('cna_news.txt', 'w', encoding='utf-8') as file:
-    file.write(news)
+    file.write(all_news)
 
-print('已保存到 cna_news.txt')
+files.download('cna_news.txt')
+
+print("成功下載所有新聞檔案")
 ```
->擷取單一新聞中的標題、時間、內容，並保存到txt檔中
+>擷取CNA新聞網中所有新聞的標題、時間、內容，並保存到txt檔中
