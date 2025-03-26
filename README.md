@@ -84,3 +84,36 @@ class Solution:
         return s == s[::-1]
 ```
 >排除特殊情況後，以反轉字串來進行直接比較
+
+
+
+#課程內容 -- 其他
+
+##BeautifulSoup - CNA新聞內容擷取
+
+```
+from urllib.request import Request, urlopen
+from bs4 import BeautifulSoup
+
+url = 'CNA新聞網中的任意新聞'
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+
+req = Request(url, headers=headers)
+html = urlopen(req).read().decode('utf-8')
+
+soup = BeautifulSoup(html, 'html.parser')
+
+title = soup.find('h1').get_text(strip=True) if soup.find('h1') else '無標題'
+
+date = soup.find('div', class_='updatetime').get_text(strip=True) if soup.find('div', class_='updatetime') else '無時間'
+
+content = '\n'.join([p.get_text(strip=True) for p in soup.find('div', class_='paragraph').find_all('p')]) if soup.find('div', class_='paragraph') else '無內容'
+
+news = f"標題：{title}\n時間：{date}\n內容：\n{content}\n"
+
+with open('cna_news.txt', 'w', encoding='utf-8') as file:
+    file.write(news)
+
+print('已保存到 cna_news.txt')
+```
+>擷取單一新聞中的標題、時間、內容，並保存到txt檔中
