@@ -1,4 +1,4 @@
-# [Leetcode](https://leetcode.com/)-Python 進階程式設計課程
+# [Leetcode](https://leetcode.com/) - 進階程式設計課程
 
 
 | | Easy | Medium | Hard | Total |
@@ -37,6 +37,20 @@ class Solution:
 ```
 >以enumerate創建字典，並透過計算補數的方式找出答案
 
+Two Sum V3(使用Golang):
+```
+func twoSum(nums []int, target int) []int {
+    for i := 0; i < len(nums); i++ {
+        for j := i + 1; j < len(nums); j++ {
+            if nums[i]+nums[j] == target {
+                return []int{i, j}
+            }
+        }
+    }
+    return nil
+}
+```
+>Golang練習，使用for迴圈的方式暴力解決
 
 ## 9. [Palindrome Number](https://leetcode.com/problems/palindrome-number/)[Easy]
 
